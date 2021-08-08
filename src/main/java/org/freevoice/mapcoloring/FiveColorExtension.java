@@ -27,6 +27,9 @@ import com.vividsolutions.jump.workbench.plugin.PlugInContext;
 /**
  * OJ extension class for map coloring plugin
  */
+// History
+// 1.1.0 (2021-08-08) : refactoring for new I18N management
+// 1.0.0 (2021-05-25) : migration to OpenJUMP 2.0
 public class FiveColorExtension extends Extension
 {
 
@@ -36,7 +39,7 @@ public class FiveColorExtension extends Extension
 	}
 	@Override
 	public String getVersion() {
-		return "1.0.0 (2021-05-25)";
+		return "1.1.0 (2021-08-08)";
 	}
 
 	@Override

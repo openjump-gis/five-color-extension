@@ -20,16 +20,18 @@
  */
 package org.freevoice.mapcoloring;
 
+import com.vividsolutions.jump.I18N;
 import com.vividsolutions.jump.workbench.plugin.AbstractPlugIn;
 import com.vividsolutions.jump.workbench.plugin.PlugInContext;
 import com.vividsolutions.jump.workbench.ui.MenuNames;
 import org.freevoice.mapcoloring.ui.FiveColorDialog;
-import org.freevoice.mapcoloring.util.StringManager;
 
 /**
  * OJ plugin to apply 5-color algorithm to color a OJ map layer.
  */
 public class FiveColorPlugin extends AbstractPlugIn {
+
+    private static final I18N i18n = I18N.getInstance("org.freevoice.mapcoloring");
 
     /**
      * @param context plugin context
@@ -38,7 +40,7 @@ public class FiveColorPlugin extends AbstractPlugIn {
     public void initialize(PlugInContext context) {
         context.getFeatureInstaller().addMainMenuPlugin(this,
             new String[] {MenuNames.PLUGINS},
-            StringManager.getString("mapcoloring.plugin.menu"),
+            i18n.get("mapcoloring.plugin.menu"),
             false, null, null);
     }
 
@@ -46,7 +48,7 @@ public class FiveColorPlugin extends AbstractPlugIn {
     public boolean execute(PlugInContext context)
     {
        FiveColorDialog dialog = new FiveColorDialog(context, context.getWorkbenchFrame(),
-             StringManager.getString("mapcoloring.plugin.menu"));
+             i18n.get("mapcoloring.plugin.menu"));
        dialog.setVisible(true);
 
        return true;

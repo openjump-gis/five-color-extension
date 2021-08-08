@@ -20,6 +20,7 @@
  */
 package org.freevoice.mapcoloring.ui;
 
+import com.vividsolutions.jump.I18N;
 import com.vividsolutions.jump.feature.Feature;
 import com.vividsolutions.jump.feature.FeatureCollection;
 import com.vividsolutions.jump.workbench.model.Layer;
@@ -31,7 +32,6 @@ import com.vividsolutions.jump.workbench.ui.renderer.style.ColorThemingStyle;
 import org.freevoice.mapcoloring.model.ColorGraph;
 import org.freevoice.mapcoloring.model.ColoringProgressListener;
 import org.freevoice.mapcoloring.model.FiveColorMap;
-import org.freevoice.mapcoloring.util.StringManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,8 +42,10 @@ import java.util.Map;
 /**
  *
  */
-public class FiveColorDialog extends JDialog implements ActionListener, ColoringProgressListener
-{
+public class FiveColorDialog extends JDialog
+    implements ActionListener, ColoringProgressListener {
+
+   private static final I18N i18n = I18N.getInstance("org.freevoice.mapcoloring");
 
    public static final String CANCEL_ACTION_COMMAND = "CancelAction";
    public static final String RUN_ACTION_COMMAND = "RunAction";
@@ -98,10 +100,10 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
             GridBagConstraints.NONE, new Insets(0, 2, 0, 0), 2, 2
       )
       );
-      String bufferToolTip = StringManager.getString("mapcoloring.buffer.tooltip");
+      String bufferToolTip = i18n.get("mapcoloring.buffer.tooltip");
       bufferCheck.setToolTipText(bufferToolTip);
 
-      JLabel bufferLabel = new JLabel(StringManager.getString("mapcoloring.bufferquestion"));
+      JLabel bufferLabel = new JLabel(i18n.get("mapcoloring.bufferquestion"));
       bufferLabel.setToolTipText(bufferToolTip);
 
       mainPanel.add(
@@ -129,7 +131,7 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
       buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
       JButton runButton = new JButton();
-      runButton.setText(StringManager.getString("mapcoloring.run"));
+      runButton.setText(i18n.get("mapcoloring.run"));
       runButton.setMnemonic('R');
       runButton.setActionCommand(RUN_ACTION_COMMAND);
       runButton.addActionListener(this);
@@ -137,7 +139,7 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
 
 
       JButton cancelButton = new JButton();
-      cancelButton.setText(StringManager.getString("mapcoloring.cancel"));
+      cancelButton.setText(i18n.get("mapcoloring.cancel"));
       cancelButton.setMnemonic('C');
       cancelButton.setActionCommand(CANCEL_ACTION_COMMAND);
       cancelButton.addActionListener(this);
@@ -225,10 +227,10 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
          if (selectedLayers.length <= 0)
          {
             JOptionPane.showMessageDialog(
-                  parentFrame,
-                  StringManager.getString("mapcoloring.selectlayer"),
-                  StringManager.getString("mapcoloring.error"),
-                  JOptionPane.ERROR_MESSAGE
+                parentFrame,
+                i18n.get("mapcoloring.selectlayer"),
+                i18n.get("mapcoloring.error"),
+                JOptionPane.ERROR_MESSAGE
             );
          }
 
@@ -241,7 +243,7 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
                FeatureCollection featureCollection = colorMap.colorMap(selectedLayer, bufferForIntersection);
                if (!isCancelled())
                {
-                  String coloredName = selectedLayer.getName() + "_" + StringManager.getString("mapcoloring.suffix");
+                  String coloredName = selectedLayer.getName() + "_" + i18n.get("mapcoloring.suffix");
                   Layer coloredLayer = context.addLayer(StandardCategoryNames.SYSTEM, coloredName, featureCollection);
                   coloredLayer.getBasicStyle().setEnabled(false);
                   ColorThemingStyle themedStyle = createColorThemingStyle();
@@ -258,20 +260,20 @@ public class FiveColorDialog extends JDialog implements ActionListener, Coloring
 
             exc.printStackTrace();
             JOptionPane.showMessageDialog(
-                  parentFrame,
-                  exc.getMessage(),
-                  StringManager.getString("mapcoloring.error"),
-                  JOptionPane.ERROR_MESSAGE
+                parentFrame,
+                exc.getMessage(),
+                i18n.get("mapcoloring.error"),
+                JOptionPane.ERROR_MESSAGE
             );
 
          }
          catch (StackOverflowError se)
          {
             JOptionPane.showMessageDialog(
-                  parentFrame,
-                  "Stack overflow.  Try increasing JVM thread stack size",
-                  StringManager.getString("mapcoloring.error"),
-                  JOptionPane.ERROR_MESSAGE
+                parentFrame,
+                "Stack overflow.  Try increasing JVM thread stack size",
+                i18n.get("mapcoloring.error"),
+                JOptionPane.ERROR_MESSAGE
             );
          }
          catch (Error e)
