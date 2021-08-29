@@ -16,8 +16,8 @@
       </includes>
     </dependencySet>
     <dependencySet>
-      <!-- place deps in a extension specific subfolder -->
-      <outputDirectory>/${project.build.finalName}</outputDirectory>
+      <!-- place deps in a extension lib/ subfolder, as jgrapht is a shared dependency -->
+      <outputDirectory>/lib</outputDirectory>
       <unpack>false</unpack>
       <scope>runtime</scope>
       <useTransitiveFiltering>true</useTransitiveFiltering>
