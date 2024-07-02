@@ -20,30 +20,31 @@
  */
 package org.freevoice.mapcoloring;
 
+import com.vividsolutions.jump.I18N;
 import com.vividsolutions.jump.workbench.plugin.Extension;
 import com.vividsolutions.jump.workbench.plugin.PlugInContext;
-
 
 /**
  * OJ extension class for map coloring plugin
  */
 // History
 // 1.1.0 (2021-08-08) : refactoring for new I18N management
-// 1.0.0 (2021-05-25) : migration to OpenJUMP 2.0
-public class FiveColorExtension extends Extension
-{
+// 2.0.0 (2021-05-25) : migration to OpenJUMP 2.0
+public class FiveColorExtension extends Extension {
 
-	public void configure(PlugInContext context)
-	{
-		new FiveColorPlugin().initialize(context);
-	}
-	@Override
-	public String getVersion() {
-		return "1.1.0 (2021-08-08)";
-	}
+  private static final I18N i18n = I18N.getInstance("org.freevoice.mapcoloring");
 
-	@Override
-	public String getName() {
-		return "Map Coloring (Five color theorem - https://en.wikipedia.org/wiki/Five_color_theorem)";
-	}
+  public void configure(PlugInContext context) {
+    new FiveColorPlugin().initialize(context);
+  }
+
+  @Override
+  public String getVersion() {
+    return i18n.get("mapcoloring.version");
+  }
+
+  @Override
+  public String getName() {
+    return "Map Coloring (five-color-extension), see Five color theorem https://en.wikipedia.org/wiki/Five_color_theorem)";
+  }
 }
